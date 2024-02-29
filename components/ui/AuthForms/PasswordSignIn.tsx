@@ -1,29 +1,30 @@
-'use client'
-import Link from 'next/link'
-import { signUp } from '@/utils/auth-helpers/server'
-import { handleRequest } from '@/utils/auth-helpers/client'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import Button from './ui/Button'
+'use client';
+
+import Button from '@/components/ui/Button';
+import Link from 'next/link';
+import { signInWithPassword } from '@/utils/auth-helpers/server';
+import { handleRequest } from '@/utils/auth-helpers/client';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 // Define prop type with allowEmail boolean
-interface SignUpProps {
-  allowEmail: boolean
-  redirectMethod: string
+interface PasswordSignInProps {
+  allowEmail: boolean;
+  redirectMethod: string;
 }
 
-export default function SignUpForm({
+export default function PasswordSignIn({
   allowEmail,
-  redirectMethod,
-}: SignUpProps) {
-  const router = redirectMethod === 'client' ? useRouter() : null
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  redirectMethod
+}: PasswordSignInProps) {
+  const router = redirectMethod === 'client' ? useRouter() : null;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true) // Disable the button while the request is being handled
-    await handleRequest(e, signUp, router)
-    setIsSubmitting(false)
-  }
+    setIsSubmitting(true); // Disable the button while the request is being handled
+    await handleRequest(e, signInWithPassword, router);
+    setIsSubmitting(false);
+  };
 
   return (
     <div className="my-8">
@@ -43,7 +44,7 @@ export default function SignUpForm({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full rounded-md bg-zinc-800 p-3"
+              className="w-full p-3 rounded-md bg-zinc-800"
             />
             <label htmlFor="password">Password</label>
             <input
@@ -52,7 +53,7 @@ export default function SignUpForm({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full rounded-md bg-zinc-800 p-3"
+              className="w-full p-3 rounded-md bg-zinc-800"
             />
           </div>
           <Button
@@ -61,23 +62,27 @@ export default function SignUpForm({
             className="mt-1"
             loading={isSubmitting}
           >
-            Sign up
+            Sign in
           </Button>
         </div>
       </form>
-      <p>Already have an account?</p>
       <p>
-        <Link href="/signin/password_signin" className="text-sm font-light">
-          Sign in with email and password
+        <Link href="/signin/forgot_password" className="font-light text-sm">
+          Forgot your password?
         </Link>
       </p>
       {allowEmail && (
         <p>
-          <Link href="/signin/email_signin" className="text-sm font-light">
+          <Link href="/signin/email_signin" className="font-light text-sm">
             Sign in via magic link
           </Link>
         </p>
       )}
+      <p>
+        <Link href="/signin/signup" className="font-light text-sm">
+          Don't have an account? Sign up
+        </Link>
+      </p>
     </div>
-  )
+  );
 }

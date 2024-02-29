@@ -1,30 +1,30 @@
-'use client';
+'use client'
 
-import Button from '@/components/ui/Button';
-import Link from 'next/link';
-import { signInWithPassword } from '@/utils/auth-helpers/server';
-import { handleRequest } from '@/utils/auth-helpers/client';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import Button from '@/components/ui/Button'
+import Link from 'next/link'
+import { signInWithPassword } from '@/utils/auth-helpers/server'
+import { handleRequest } from '@/utils/auth-helpers/client'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
-  allowEmail: boolean;
-  redirectMethod: string;
+  allowEmail: boolean
+  redirectMethod: string
 }
 
 export default function PasswordSignIn({
   allowEmail,
-  redirectMethod
+  redirectMethod,
 }: PasswordSignInProps) {
-  const router = redirectMethod === 'client' ? useRouter() : null;
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = redirectMethod === 'client' ? useRouter() : null
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true); // Disable the button while the request is being handled
-    await handleRequest(e, signInWithPassword, router);
-    setIsSubmitting(false);
-  };
+    setIsSubmitting(true) // Disable the button while the request is being handled
+    await handleRequest(e, signInWithPassword, router)
+    setIsSubmitting(false)
+  }
 
   return (
     <div className="my-8">
@@ -44,7 +44,7 @@ export default function PasswordSignIn({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full p-3 rounded-md bg-zinc-800"
+              className="border-ink w-full border border-solid p-3"
             />
             <label htmlFor="password">Password</label>
             <input
@@ -53,7 +53,7 @@ export default function PasswordSignIn({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full p-3 rounded-md bg-zinc-800"
+              className="border-ink w-full border border-solid p-3"
             />
           </div>
           <Button
@@ -67,22 +67,22 @@ export default function PasswordSignIn({
         </div>
       </form>
       <p>
-        <Link href="/signin/forgot_password" className="font-light text-sm">
+        <Link href="/signin/forgot_password" className="text-sm font-light">
           Forgot your password?
         </Link>
       </p>
       {allowEmail && (
         <p>
-          <Link href="/signin/email_signin" className="font-light text-sm">
+          <Link href="/signin/email_signin" className="text-sm font-light">
             Sign in via magic link
           </Link>
         </p>
       )}
       <p>
-        <Link href="/signin/signup" className="font-light text-sm">
+        <Link href="/signin/signup" className="text-sm font-light">
           Don't have an account? Sign up
         </Link>
       </p>
     </div>
-  );
+  )
 }

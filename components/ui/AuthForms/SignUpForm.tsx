@@ -43,7 +43,7 @@ export default function SignUpForm({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="w-full rounded-md bg-zinc-800 p-3"
+              className="border-ink w-full border border-solid p-3"
             />
             <label htmlFor="password">Password</label>
             <input
@@ -52,7 +52,7 @@ export default function SignUpForm({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="w-full rounded-md bg-zinc-800 p-3"
+              className="border-ink w-full border border-solid p-3"
             />
           </div>
           <Button

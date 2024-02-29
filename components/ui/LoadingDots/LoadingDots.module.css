@@ -3,7 +3,7 @@
 }
 
 .root span {
-  @apply h-2 w-2 rounded-full bg-zinc-200;
+  @apply h-2 w-2 rounded-full bg-ink;
   animation-name: blink;
   animation-duration: 1.4s;
   animation-iteration-count: infinite;

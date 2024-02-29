@@ -1,0 +1,19 @@
+.root {
+  @apply sticky top-0 z-40 h-16 bg-ink transition-all duration-150 md:h-20;
+}
+
+.link {
+  @apply inline-flex cursor-pointer items-center rounded-md p-1 font-medium leading-6 text-ink transition duration-75 ease-in-out;
+}
+
+.link:hover {
+  @apply text-ink;
+}
+
+.link:focus {
+  @apply text-ink outline-none ring-2 ring-ink ring-opacity-50;
+}
+
+.logo {
+  @apply transform cursor-pointer rounded-full duration-100 ease-in-out;
+}

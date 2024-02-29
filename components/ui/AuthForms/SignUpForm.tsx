@@ -1,9 +1,11 @@
 'use client'
-import Link from 'next/link'
-import { signUp } from '@/utils/auth-helpers/server'
-import { handleRequest } from '@/utils/auth-helpers/client'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+import { handleRequest } from '@/utils/auth-helpers/client'
+import { signUp } from '@/utils/auth-helpers/server'
+
 import Button from '../Button'
 
 // Define prop type with allowEmail boolean
@@ -12,10 +14,7 @@ interface SignUpProps {
   redirectMethod: string
 }
 
-export default function SignUpForm({
-  allowEmail,
-  redirectMethod,
-}: SignUpProps) {
+const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
   const router = redirectMethod === 'client' ? useRouter() : null
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -26,14 +25,14 @@ export default function SignUpForm({
   }
 
   return (
-    <div className="my-8">
+    <div className="mt-4">
       <form
         noValidate={true}
         className="mb-4"
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="grid gap-2">
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -43,7 +42,7 @@ export default function SignUpForm({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="border-ink w-full border border-solid p-3"
+              className="w-full border border-solid border-ink p-3"
             />
             <label htmlFor="password">Password</label>
             <input
@@ -52,7 +51,7 @@ export default function SignUpForm({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="border-ink w-full border border-solid p-3"
+              className="w-full border border-solid border-ink p-3"
             />
           </div>
           <Button
@@ -81,3 +80,4 @@ export default function SignUpForm({
     </div>
   )
 }
+export default SignUpForm

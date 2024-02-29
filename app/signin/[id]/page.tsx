@@ -1,26 +1,27 @@
-import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import {
-  getAuthTypes,
-  getViewTypes,
-  getDefaultSignInView,
-  getRedirectMethod,
-} from '@/utils/auth-helpers/settings'
-import Card from '@/components/ui/Card'
-import PasswordSignIn from '@/components/ui/AuthForms/PasswordSignIn'
+
 import EmailSignIn from '@/components/ui/AuthForms/EmailSignIn'
 import ForgotPassword from '@/components/ui/AuthForms/ForgotPassword'
-import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword'
+import PasswordSignIn from '@/components/ui/AuthForms/PasswordSignIn'
 import SignUpForm from '@/components/ui/AuthForms/SignUpForm'
+import UpdatePassword from '@/components/ui/AuthForms/UpdatePassword'
+import Card from '@/components/ui/Card'
+import {
+  getAuthTypes,
+  getDefaultSignInView,
+  getRedirectMethod,
+  getViewTypes,
+} from '@/utils/auth-helpers/settings'
+import { createClient } from '@/utils/supabase/server'
 
-export default async function SignIn({
+const SignIn = async ({
   params,
   searchParams,
 }: {
   params: { id: string }
   searchParams: { disable_button: boolean }
-}) {
+}) => {
   const { allowEmail, allowPassword } = getAuthTypes()
   const viewTypes = getViewTypes()
   const redirectMethod = getRedirectMethod()
@@ -99,3 +100,4 @@ export default async function SignIn({
     </div>
   )
 }
+export default SignIn

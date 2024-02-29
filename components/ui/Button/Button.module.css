@@ -1,9 +1,9 @@
 .root {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-sm border border-solid border-ink bg-reverse px-10 py-4 text-center font-semibold uppercase leading-6 text-ink shadow-sm transition duration-150 ease-in-out;
+  @apply inline-flex cursor-pointer items-center justify-center border border-solid border-ink bg-reverse px-10 py-4 text-center lowercase leading-6 text-ink shadow-sm transition-colors duration-150 ease-in-out;
 }
 
 .root:hover {
-  @apply border border-reverse bg-ink;
+  @apply border border-reverse bg-ink text-reverse;
 }
 
 .root:focus {

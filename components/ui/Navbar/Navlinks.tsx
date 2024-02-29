@@ -1,39 +1,39 @@
 'use client'
 
+import { useCallback, useRef, useState } from 'react'
 import Link from 'next/link'
-import { SignOut } from '@/utils/auth-helpers/server'
-import { handleRequest } from '@/utils/auth-helpers/client'
-import { usePathname, useRouter } from 'next/navigation'
-import { getRedirectMethod } from '@/utils/auth-helpers/settings'
-import s from './Navbar.module.css'
+
+import AccountMenu from '@/components/ui/AccountMenu'
 import Account from '@/components/ui/icons/Account'
+import UseClickOutside from '@/hooks/UseClickOutside'
 
 interface NavlinksProps {
   user?: any
 }
 
-export default function Navlinks({ user }: NavlinksProps) {
-  const router = getRedirectMethod() === 'client' ? useRouter() : null
+const NavLinks = ({ user }: NavlinksProps) => {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const toggleModal = () => setMenuOpen(!menuOpen)
+  const closeMenu = () => setMenuOpen(false)
+
+  const headerRef = useRef()
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleClickOutside = useCallback(() => closeMenu(), [headerRef])
+
+  UseClickOutside(headerRef, handleClickOutside)
 
   return (
-    <div className="align-center relative flex flex-row justify-between py-4 md:py-6">
+    <div
+      className="align-center relative flex flex-row justify-between py-4 md:py-6"
+      ref={headerRef}
+    >
       <div className="flex flex-1 items-center">
         <h1>
-          <Link
-            href="/"
-            className={s.logo}
-            aria-label="untitled sample library"
-          >
-            untitled sample library
+          <Link href="/" aria-label="untitled sample library">
+            untitled sample library 🍃
           </Link>
         </h1>
-        <nav className="ml-6 space-x-2 lg:block">
-          {user && (
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
-          )}
-        </nav>
       </div>
       <div className="flex justify-end space-x-8">
         <button
@@ -41,26 +41,17 @@ export default function Navlinks({ user }: NavlinksProps) {
           aria-label="account"
           aria-controls="account-menu"
           className="flex items-center"
+          onClick={toggleModal}
         >
-          {user && <div className="bg-red mr-2 h-4 w-4 rounded-full"></div>}
+          {user && <div className="mr-2 h-4 w-4 rounded-full bg-red"></div>}
           <div className="h-6 w-6">
             <Account />
           </div>
         </button>
-
-        {user ? (
-          <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-            <input type="hidden" name="pathName" value={usePathname()} />
-            <button type="submit" className={s.link}>
-              Sign out
-            </button>
-          </form>
-        ) : (
-          <Link href="/signin" className={s.link}>
-            Sign In
-          </Link>
-        )}
+        <AccountMenu user={user} menuOpen={menuOpen} />
       </div>
     </div>
   )
 }
+
+export default NavLinks

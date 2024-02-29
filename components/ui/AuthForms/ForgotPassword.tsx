@@ -1,11 +1,12 @@
 'use client'
 
-import Button from '@/components/ui/Button'
-import Link from 'next/link'
-import { requestPasswordUpdate } from '@/utils/auth-helpers/server'
-import { handleRequest } from '@/utils/auth-helpers/client'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
+import Button from '@/components/ui/Button'
+import { handleRequest } from '@/utils/auth-helpers/client'
+import { requestPasswordUpdate } from '@/utils/auth-helpers/server'
 
 // Define prop type with allowEmail boolean
 interface ForgotPasswordProps {
@@ -14,11 +15,11 @@ interface ForgotPasswordProps {
   disableButton?: boolean
 }
 
-export default function ForgotPassword({
+const ForgotPassword = ({
   allowEmail,
   redirectMethod,
   disableButton,
-}: ForgotPasswordProps) {
+}: ForgotPasswordProps) => {
   const router = redirectMethod === 'client' ? useRouter() : null
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -29,14 +30,14 @@ export default function ForgotPassword({
   }
 
   return (
-    <div className="my-8">
+    <div className="mt-4">
       <form
         noValidate={true}
         className="mb-4"
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="grid gap-2">
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -46,7 +47,7 @@ export default function ForgotPassword({
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              className="border-ink w-full border border-solid p-3"
+              className="w-full border border-solid border-ink p-3"
             />
           </div>
           <Button
@@ -61,22 +62,24 @@ export default function ForgotPassword({
         </div>
       </form>
       <p>
-        <Link href="/signin/password_signin" className="text-sm font-light">
+        <Link href="/signin/password_signin" className="text-sm lowercase">
           Sign in with email and password
         </Link>
       </p>
       {allowEmail && (
         <p>
-          <Link href="/signin/email_signin" className="text-sm font-light">
+          <Link href="/signin/email_signin" className="text-sm lowercase">
             Sign in via magic link
           </Link>
         </p>
       )}
       <p>
-        <Link href="/signin/signup" className="text-sm font-light">
+        <Link href="/signin/signup" className="text-sm lowercase">
           Don't have an account? Sign up
         </Link>
       </p>
     </div>
   )
 }
+
+export default ForgotPassword

@@ -1,18 +1,17 @@
 'use client'
 
-import Button from '@/components/ui/Button'
-import { updatePassword } from '@/utils/auth-helpers/server'
-import { handleRequest } from '@/utils/auth-helpers/client'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+import Button from '@/components/ui/Button'
+import { handleRequest } from '@/utils/auth-helpers/client'
+import { updatePassword } from '@/utils/auth-helpers/server'
 
 interface UpdatePasswordProps {
   redirectMethod: string
 }
 
-export default function UpdatePassword({
-  redirectMethod,
-}: UpdatePasswordProps) {
+const UpdatePassword = ({ redirectMethod }: UpdatePasswordProps) => {
   const router = redirectMethod === 'client' ? useRouter() : null
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -23,14 +22,14 @@ export default function UpdatePassword({
   }
 
   return (
-    <div className="my-8">
+    <div className="mt-4">
       <form
         noValidate={true}
         className="mb-4"
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="grid gap-2">
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             <label htmlFor="password">New Password</label>
             <input
               id="password"
@@ -38,7 +37,7 @@ export default function UpdatePassword({
               type="password"
               name="password"
               autoComplete="current-password"
-              className="border-ink w-full border border-solid p-3"
+              className="w-full border border-solid border-ink p-3"
             />
             <label htmlFor="passwordConfirm">Confirm New Password</label>
             <input
@@ -47,7 +46,7 @@ export default function UpdatePassword({
               type="password"
               name="passwordConfirm"
               autoComplete="current-password"
-              className="border-ink w-full border border-solid p-3"
+              className="w-full border border-solid border-ink p-3"
             />
           </div>
           <Button
@@ -63,3 +62,5 @@ export default function UpdatePassword({
     </div>
   )
 }
+
+export default UpdatePassword

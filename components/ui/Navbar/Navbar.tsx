@@ -1,7 +1,8 @@
 import { createClient } from '@/utils/supabase/server'
+
 import Navlinks from './Navlinks'
 
-export default async function Navbar() {
+const Navbar = async () => {
   const supabase = createClient()
 
   const {
@@ -13,9 +14,9 @@ export default async function Navbar() {
       <a href="#skip" className="sr-only focus:not-sr-only">
         Skip to content
       </a>
-      <div className="mx-auto max-w-6xl px-6">
-        <Navlinks user={user} />
-      </div>
+      <Navlinks user={user} />
     </nav>
   )
 }
+
+export default Navbar

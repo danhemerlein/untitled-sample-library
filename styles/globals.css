@@ -1,0 +1,50 @@
+@import 'tailwind.css';
+@import 'reset.css';
+@import 'utilities.css';
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+.rtc p,
+.rtc img,
+.rtc li:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.rtc h2 {
+  margin-bottom: 1rem;
+}
+
+.rtc em {
+  font-style: italic;
+}
+
+.rtc b,
+.rtc h2 {
+  font-weight: 700;
+}
+
+.rtc a {
+  font-style: italic;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  transition: all 0.3s ease;
+}
+
+.rtc a:hover {
+  color: #c23b22;
+}
+
+.rtc .figcaption {
+  font-style: italic;
+  text-align: center;
+}

@@ -6,22 +6,51 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "eslint": "eslint --fix --ignore-path .prettierignore .",
+    "verify": "yarn lint-staged",
+    "prettier": "prettier --check . --write",
+    "type-check": "tsc"
   },
   "dependencies": {
+    "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.0"
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.39.3",
+    "classnames": "^2.5.1",
+    "react-merge-refs": "^2.1.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@next/eslint-plugin-next": "^12.1.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
+    "eslint-plugin-prefer-arrow-functions": "^3.1.4",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0"
+    "eslint-config-next": "14.1.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "lint-staged": "^12.2.0",
+    "postcss": "^8",
+    "postcss-import": "latest",
+    "postcss-loader": "latest",
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  },
+  "pre-commit": [
+    "verify"
+  ],
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --ignore-path .prettierignore --max-warnings=0 --no-ignore",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   }
 }

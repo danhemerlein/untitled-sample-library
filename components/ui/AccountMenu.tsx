@@ -21,14 +21,15 @@ const AccountMenu = ({ user, menuOpen }: AccountMenuProps) => {
       id="account-menu"
       aria-hidden={!menuOpen}
       className={cn(
-        'transition-cubic-bezier bg-white absolute right-0 top-full z-50 flex w-36 flex-col gap-4 border border-solid border-ink p-4 text-ink opacity-0 transition-opacity',
+        'transition-cubic-bezier absolute right-0 top-full z-50 flex w-36 flex-col gap-4 border border-solid border-ink bg-ink p-4 text-reverse opacity-0 transition-opacity',
         menuOpen && 'opacity-100',
       )}
     >
       {user ? (
         <>
-          <nav className="">
-            <Link href="/account">account</Link>
+          <nav className="flex flex-col gap-4 ">
+            <Link href="/profile">profile</Link>
+            <Link href="/settings">settings</Link>
           </nav>
           <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
             <input type="hidden" name="pathName" value={usePathname()} />

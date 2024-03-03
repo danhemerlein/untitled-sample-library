@@ -1,8 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 
-import Download from './ui/icons/Download'
 import Play from './ui/icons/Play'
-import Plus from './ui/icons/Plus'
+import SampleActions from './SampleActions'
 
 const SampleList = async () => {
   const supabase = createClient()
@@ -15,19 +14,13 @@ const SampleList = async () => {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const DownloadClickHandler = () => {
-    if (!user) {
-    }
-  }
-
   return (
     <div className="mt-8">
-      <ul className="grid grid-cols-5 gap-2">
+      <ul className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-5">
         {data?.map((sample) => {
           const { data } = supabase.storage
             .from('samples')
             .getPublicUrl(sample.name)
-          console.log(data.publicUrl)
 
           return (
             <li
@@ -43,22 +36,9 @@ const SampleList = async () => {
                 <Play />
               </a>
 
-              <div className="absolute left-4 top-2 flex w-[calc(100%-2rem)] items-center justify-between">
-                <p>{sample.name}</p>
-
-                <div>
-                  <button>
-                    <div className="h-[24px] w-[24px]">
-                      <Download />
-                    </div>
-                  </button>
-
-                  <button>
-                    <div className="h-[24px] w-[24px]">
-                      <Plus />
-                    </div>
-                  </button>
-                </div>
+              <div className="absolute left-4 top-2 flex w-[calc(100%-2rem)] flex-col items-start md:flex-row md:items-center md:justify-between">
+                <p className="text-sm">{sample.name}</p>
+                <SampleActions user={user} publicUrl={data.publicUrl} />
               </div>
             </li>
           )

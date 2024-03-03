@@ -162,6 +162,27 @@ export const signInWithPassword = async (formData: FormData) => {
   return redirectPath
 }
 
+export const handleDownloadRequest = async () => {
+  const supabase = createClient()
+  let redirectPath: string
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return getErrorRedirect(
+      '/',
+      'Hmm... Something went wrong.',
+      'You could not be signed out.',
+    )
+  }
+
+  // add file to users donwloaded items in the database
+  // save the file to the user's device
+  // return redirectPath
+}
+
 export const signUp = async (formData: FormData) => {
   const callbackURL = getURL('/auth/callback')
 
@@ -189,7 +210,7 @@ export const signUp = async (formData: FormData) => {
   if (error) {
     redirectPath = getErrorRedirect(
       '/signin/signup',
-      'Sign up failed.',
+      'sign up failed.',
       error.message,
     )
   } else if (data.session) {
@@ -201,10 +222,19 @@ export const signUp = async (formData: FormData) => {
   ) {
     redirectPath = getErrorRedirect(
       '/signin/signup',
-      'Sign up failed.',
+      'sign up failed.',
       'There is already an account associated with this email address. Try resetting your password.',
     )
   } else if (data.user) {
+    console.log('data.user', data.user)
+    console.log('data.session', data.session)
+
+    // TODO - this isn't working
+
+    const { error } = await supabase.from('users').insert({ id: data.user.id })
+
+    console.log('insert error ', error)
+
     redirectPath = getStatusRedirect(
       '/',
       'Success!',

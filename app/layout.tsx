@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   description: 'equanimous sample sharing. are.na for audio.',
 }
 
-export default ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) => (
   <html lang="en">
-    <body className={`${inter.className} px-16`}>
+    <body className={`${inter.className} px-4 md:px-16`}>
       <NavBar />
       {children}
       <Suspense>
@@ -30,3 +30,5 @@ export default ({
     </body>
   </html>
 )
+
+export default Layout

@@ -68,19 +68,25 @@ const PasswordSignIn = ({
         </div>
       </form>
       <p>
-        <Link href="/signin/forgot_password" className="text-sm lowercase">
+        <Link
+          href="/signin/forgot_password"
+          className="dotted-link text-sm lowercase"
+        >
           Forgot your password?
         </Link>
       </p>
       {allowEmail && (
         <p>
-          <Link href="/signin/email_signin" className="text-sm lowercase">
+          <Link
+            href="/signin/email_signin"
+            className="dotted-link text-sm lowercase"
+          >
             Sign in via magic link
           </Link>
         </p>
       )}
       <p>
-        <Link href="/signin/signup" className="text-sm lowercase">
+        <Link href="/signin/signup" className="dotted-link text-sm lowercase">
           Don't have an account? Sign up
         </Link>
       </p>

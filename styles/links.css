@@ -1,0 +1,18 @@
+@layer components {
+  .link {
+    @apply transition-cubic-bezier underline decoration-ink decoration-1 underline-offset-1 transition-colors duration-300 ease-linear;
+  }
+  .link:focus {
+    @apply text-red decoration-red;
+  }
+
+  .link:hover {
+    @apply text-red decoration-red;
+  }
+}
+
+@layer components {
+  .dotted-link {
+    @apply transition-cubic-bezier italic underline decoration-dotted underline-offset-2 transition-colors hover:text-red focus:text-red;
+  }
+}

@@ -214,6 +214,12 @@ export const signUp = async (formData: FormData) => {
       error.message,
     )
   } else if (data.session) {
+    if (data.user) {
+      const supabaseResponse = await supabase
+        .from('users')
+        .insert({ id: data.user.id, email: data.user.email })
+    }
+
     redirectPath = getStatusRedirect('/', 'Success!', 'You are now signed in.')
   } else if (
     data.user &&
@@ -226,14 +232,9 @@ export const signUp = async (formData: FormData) => {
       'There is already an account associated with this email address. Try resetting your password.',
     )
   } else if (data.user) {
-    console.log('data.user', data.user)
-    console.log('data.session', data.session)
-
-    // TODO - this isn't working
-
-    const { error } = await supabase.from('users').insert({ id: data.user.id })
-
-    console.log('insert error ', error)
+    const supabaseResponse = await supabase
+      .from('users')
+      .insert({ id: data.user.id, email: data.user.email })
 
     redirectPath = getStatusRedirect(
       '/',

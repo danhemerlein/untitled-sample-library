@@ -35,7 +35,16 @@ const NavLinks = ({ user }: NavlinksProps) => {
           </Link>
         </h1>
       </div>
-      <div className="flex justify-end space-x-8">
+
+      <div className="flex items-center justify-end gap-4">
+        <Link href="/blog" aria-label="">
+          blog
+        </Link>
+
+        <Link href="/about" aria-label="">
+          about
+        </Link>
+
         <button
           type="button"
           aria-label="account"

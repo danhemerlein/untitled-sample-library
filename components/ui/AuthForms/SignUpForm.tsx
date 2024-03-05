@@ -8,6 +8,8 @@ import { signUp } from '@/utils/auth-helpers/server'
 
 import Button from '../Button'
 
+import SignInWithEmailPasswordLink from './SignInWithEmailPasswordLink'
+
 // Define prop type with allowEmail boolean
 interface SignUpProps {
   allowEmail: boolean
@@ -33,7 +35,7 @@ const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
       >
         <div className="grid gap-2">
           <div className="grid gap-2">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">email</label>
             <input
               id="email"
               placeholder="name@example.com"
@@ -44,7 +46,7 @@ const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
               autoCorrect="off"
               className="w-full border border-solid border-ink p-3"
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">password</label>
             <input
               id="password"
               placeholder="password"
@@ -60,20 +62,19 @@ const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
             className="mt-1"
             loading={isSubmitting}
           >
-            Sign up
+            sign up
           </Button>
         </div>
       </form>
-      <p>Already have an account?</p>
-      <p>
-        <Link href="/signin/password_signin" className="text-sm font-light">
-          Sign in with email and password
-        </Link>
-      </p>
+      <p className="text-sm lowercase">already have an account?</p>
+      <SignInWithEmailPasswordLink />
       {allowEmail && (
         <p>
-          <Link href="/signin/email_signin" className="text-sm font-light">
-            Sign in via magic link
+          <Link
+            href="/signin/email_signin"
+            className="dotted-link text-sm lowercase"
+          >
+            sign in via magic link
           </Link>
         </p>
       )}

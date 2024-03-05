@@ -1,6 +1,7 @@
 @import 'tailwind.css';
 @import 'reset.css';
 @import 'utilities.css';
+@import 'links.css';
 
 .visually-hidden {
   position: absolute !important;

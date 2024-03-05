@@ -62,8 +62,8 @@ const SignIn = async ({
               : viewProp === 'update_password'
                 ? 'Update Password'
                 : viewProp === 'signup'
-                  ? 'Sign Up'
-                  : 'Sign In'
+                  ? 'sign up'
+                  : 'sign in'
           }
         >
           {viewProp === 'password_signin' && (

@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 import { handleRequest } from '@/utils/auth-helpers/client'
 import { requestPasswordUpdate } from '@/utils/auth-helpers/server'
 
-import SignInWithEmailPasswordLin from './SignInWithEmailPasswordLin'
+import AuthLink from './AuthLink'
 
 // Define prop type with allowEmail boolean
 interface ForgotPasswordProps {
@@ -63,22 +63,14 @@ const ForgotPassword = ({
           </Button>
         </div>
       </form>
-      <SignInWithEmailPasswordLink />
+      <AuthLink
+        href="/signin/password_signin"
+        cta="sign in with email and password"
+      />
       {allowEmail && (
-        <p>
-          <Link
-            href="/signin/email_signin"
-            className="dotted-link text-sm lowercase"
-          >
-            sign in via magic link
-          </Link>
-        </p>
+        <AuthLink href="/signin/email_signin" cta="sign in via magic link" />
       )}
-      <p>
-        <Link href="/signin/signup" className="dotted-link text-sm lowercase">
-          don't have an account? sign up
-        </Link>
-      </p>
+      <AuthLink href="/signin/signup" cta="don't have an account? sign up" />
     </div>
   )
 }

@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import Button from '@/components/ui/Button'
 import { handleRequest } from '@/utils/auth-helpers/client'
 import { signInWithEmail } from '@/utils/auth-helpers/server'
 
-import SignInWithEmailPasswordLink from './SignInWithEmailPasswordLink'
+import AuthLink from './AuthLink'
 
 // Define prop type with allowPassword boolean
 interface EmailSignInProps {
@@ -65,13 +64,15 @@ const EmailSignIn = ({
       </form>
       {allowPassword && (
         <>
-          <SignInWithEmailPasswordLink />
+          <AuthLink
+            href="/signin/password_signin"
+            cta="sign in with email and password"
+          />
 
-          <p>
-            <Link href="/signin/signup" className="link text-sm lowercase">
-              don't have an account? sign up
-            </Link>
-          </p>
+          <AuthLink
+            href="/signin/signup"
+            cta="don't have an account? sign up"
+          />
         </>
       )}
     </div>

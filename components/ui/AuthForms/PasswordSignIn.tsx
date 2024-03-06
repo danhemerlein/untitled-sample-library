@@ -8,6 +8,8 @@ import Button from '@/components/ui/Button'
 import { handleRequest } from '@/utils/auth-helpers/client'
 import { signInWithPassword } from '@/utils/auth-helpers/server'
 
+import AuthLink from './AuthLink'
+
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
   allowEmail: boolean
@@ -67,29 +69,11 @@ const PasswordSignIn = ({
           </Button>
         </div>
       </form>
-      <p>
-        <Link
-          href="/signin/forgot_password"
-          className="dotted-link text-sm lowercase"
-        >
-          Forgot your password?
-        </Link>
-      </p>
+      <AuthLink href="/signin/forgot_password" cta="Forgot your password?" />
       {allowEmail && (
-        <p>
-          <Link
-            href="/signin/email_signin"
-            className="dotted-link text-sm lowercase"
-          >
-            Sign in via magic link
-          </Link>
-        </p>
+        <AuthLink href="/signin/email_signin" cta="Sign in via magic link" />
       )}
-      <p>
-        <Link href="/signin/signup" className="dotted-link text-sm lowercase">
-          Don't have an account? Sign up
-        </Link>
-      </p>
+      <AuthLink href="/signin/signup" cta="Don't have an account? Sign up" />
     </div>
   )
 }

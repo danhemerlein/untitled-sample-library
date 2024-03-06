@@ -8,7 +8,7 @@ import { signUp } from '@/utils/auth-helpers/server'
 
 import Button from '../Button'
 
-import SignInWithEmailPasswordLink from './SignInWithEmailPasswordLink'
+import AuthLink from './AuthLink'
 
 // Define prop type with allowEmail boolean
 interface SignUpProps {
@@ -67,16 +67,12 @@ const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
         </div>
       </form>
       <p className="text-sm lowercase">already have an account?</p>
-      <SignInWithEmailPasswordLink />
+      <AuthLink
+        href="/signin/password_signin"
+        cta="sign in with email and password"
+      />
       {allowEmail && (
-        <p>
-          <Link
-            href="/signin/email_signin"
-            className="dotted-link text-sm lowercase"
-          >
-            sign in via magic link
-          </Link>
-        </p>
+        <AuthLink href="/signin/email_signin" cta="sign in via magic link" />
       )}
     </div>
   )

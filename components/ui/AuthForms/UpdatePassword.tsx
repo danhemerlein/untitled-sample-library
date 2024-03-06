@@ -30,7 +30,9 @@ const UpdatePassword = ({ redirectMethod }: UpdatePasswordProps) => {
       >
         <div className="grid gap-2">
           <div className="grid gap-2">
-            <label htmlFor="password">New Password</label>
+            <label htmlFor="password" className="lowercase">
+              New Password
+            </label>
             <input
               id="password"
               placeholder="Password"
@@ -39,7 +41,9 @@ const UpdatePassword = ({ redirectMethod }: UpdatePasswordProps) => {
               autoComplete="current-password"
               className="w-full border border-solid border-ink p-3"
             />
-            <label htmlFor="passwordConfirm">Confirm New Password</label>
+            <label htmlFor="passwordConfirm" className="lowercase">
+              Confirm New Password
+            </label>
             <input
               id="passwordConfirm"
               placeholder="Password"
@@ -55,7 +59,7 @@ const UpdatePassword = ({ redirectMethod }: UpdatePasswordProps) => {
             className="mt-1"
             loading={isSubmitting}
           >
-            Update Password
+            update password
           </Button>
         </div>
       </form>

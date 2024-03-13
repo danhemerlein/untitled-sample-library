@@ -47,7 +47,7 @@ border-solid border-ink p-4 text-center"
               </a>
 
               <div className="absolute left-4 top-2 flex w-[calc(100%-2rem)] flex-col items-start md:flex-row md:items-center md:justify-between">
-                <p className="text-sm">{sample.name}</p>
+                <p className="text-left text-sm">{sample.name}</p>
                 <SampleActions user={user} publicUrl={data.publicUrl} />
               </div>
             </li>

@@ -8,7 +8,7 @@ import { getErrorRedirect, getStatusRedirect, getURL } from '../helpers'
 import { createClient } from '../supabase/server'
 
 const isValidEmail = (email: string) => {
-  var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
   return regex.test(email)
 }
 
@@ -162,6 +162,7 @@ export const signInWithPassword = async (formData: FormData) => {
   return redirectPath
 }
 
+// move this to the supabase directory
 export const handleDownloadRequest = async () => {
   const supabase = createClient()
   let redirectPath: string
@@ -188,14 +189,28 @@ export const signUp = async (formData: FormData) => {
 
   const email = String(formData.get('email')).trim()
   const password = String(formData.get('password')).trim()
+  const passwordConfirm = String(formData.get('passwordConfirm')).trim()
+
   let redirectPath: string
 
   if (!isValidEmail(email)) {
     redirectPath = getErrorRedirect(
       '/signin/signup',
-      'Invalid email address.',
-      'Please try again.',
+      'invalid email address',
+      'please try again',
     )
+
+    return redirectPath
+  }
+
+  if (!(password === passwordConfirm)) {
+    redirectPath = getErrorRedirect(
+      '/signin/signup',
+      'passwords do not match',
+      'please try again',
+    )
+
+    return redirectPath
   }
 
   const supabase = createClient()
@@ -331,36 +346,6 @@ export const updateEmail = async (formData: FormData) => {
       '/account',
       'Confirmation emails sent.',
       `You will need to confirm the update by clicking the links sent to both the old and new email addresses.`,
-    )
-  }
-}
-
-export const updateName = async (formData: FormData) => {
-  // Get form data
-  const fullName = String(formData.get('fullName')).trim()
-
-  const supabase = createClient()
-  const { error, data } = await supabase.auth.updateUser({
-    data: { full_name: fullName },
-  })
-
-  if (error) {
-    return getErrorRedirect(
-      '/account',
-      'Your name could not be updated.',
-      error.message,
-    )
-  } else if (data.user) {
-    return getStatusRedirect(
-      '/account',
-      'Success!',
-      'Your name has been updated.',
-    )
-  } else {
-    return getErrorRedirect(
-      '/account',
-      'Hmm... Something went wrong.',
-      'Your name could not be updated.',
     )
   }
 }

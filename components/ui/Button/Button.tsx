@@ -1,8 +1,8 @@
 'use client'
 
-import cn from 'classnames'
-import React, { forwardRef, useRef, ButtonHTMLAttributes } from 'react'
+import React, { ButtonHTMLAttributes, forwardRef, useRef } from 'react'
 import { mergeRefs } from 'react-merge-refs'
+import cn from 'classnames'
 
 import LoadingDots from '../LoadingDots'
 
@@ -52,11 +52,12 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, buttonRef) => {
       }}
       {...rest}
     >
-      {children}
-      {loading && (
+      {loading ? (
         <i className="m-0 flex pl-2">
-          <LoadingDots />
+          loading <LoadingDots />
         </i>
+      ) : (
+        children
       )}
     </Component>
   )

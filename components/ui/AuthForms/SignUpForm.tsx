@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { handleRequest } from '@/utils/auth-helpers/client'
@@ -53,6 +52,17 @@ const SignUpForm = ({ allowEmail, redirectMethod }: SignUpProps) => {
               type="password"
               name="password"
               autoComplete="current-password"
+              className="w-full border border-solid border-ink p-3"
+            />
+            <p className="text-xs text-red">
+              (must be at least 6 characters long)
+            </p>
+            <label htmlFor="passwordConfirm">confirm password</label>
+            <input
+              id="passwordConfirm"
+              placeholder="confirm password"
+              type="password"
+              name="passwordConfirm"
               className="w-full border border-solid border-ink p-3"
             />
           </div>

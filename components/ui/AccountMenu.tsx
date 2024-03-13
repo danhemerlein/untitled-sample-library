@@ -37,7 +37,10 @@ const AccountMenu = ({ user, menuOpen }: AccountMenuProps) => {
           </form>
         </>
       ) : (
-        <Link href="/signin">sign in</Link>
+        <>
+          <Link href="/signin">sign in</Link>
+          <Link href="/signin/signup">sign up</Link>
+        </>
       )}
     </div>
   )

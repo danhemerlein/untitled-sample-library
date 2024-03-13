@@ -6,16 +6,12 @@
   @apply border border-reverse bg-ink text-reverse;
 }
 
-.root:focus {
-  @apply outline-none ring-2 ring-ink ring-opacity-50;
-}
-
 .root[data-active] {
   @apply bg-ink;
 }
 
 .loading {
-  @apply cursor-not-allowed border-ink bg-ink text-ink;
+  @apply cursor-not-allowed border-ink bg-reverse text-ink;
 }
 
 .slim {

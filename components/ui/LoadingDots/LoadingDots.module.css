@@ -3,12 +3,16 @@
 }
 
 .root span {
-  @apply h-2 w-2 rounded-full bg-ink;
+  @apply h-2 w-2 rounded-full bg-red;
   animation-name: blink;
   animation-duration: 1.4s;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
   margin: 0 2px;
+}
+
+.root span:nth-of-type(1) {
+  margin-left: 1rem;
 }
 
 .root span:nth-of-type(2) {

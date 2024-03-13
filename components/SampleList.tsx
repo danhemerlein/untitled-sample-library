@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server'
 
 import Play from './ui/icons/Play'
 import SampleActions from './SampleActions'
+import UploadSample from './UploadSample'
 
 const SampleList = async () => {
   const supabase = createClient()
@@ -17,6 +18,15 @@ const SampleList = async () => {
   return (
     <div className="mt-8">
       <ul className="grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-5">
+        {user && (
+          <li
+            className="relative flex min-h-[260px] flex-col items-center justify-center border
+border-solid border-ink p-4 text-center"
+          >
+            <UploadSample />
+          </li>
+        )}
+
         {data?.map((sample) => {
           const { data } = supabase.storage
             .from('samples')
